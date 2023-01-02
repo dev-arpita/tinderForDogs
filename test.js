@@ -13,14 +13,7 @@ function getNewDog() {
 console.log("nextDog:", nextDog)
     render()
      return nextDog ?  new Dog(nextDog) : {}
-
-    // endMessage()
 }
-// function getNewDog() {
-//     const nextDog = dogs[dogsArray.shift()]
-//     return nextDog ? new Character(nextDog) : {}
-
-// }
 
  const endMessage = ()=> {
     const endEmoji = "🐶"
