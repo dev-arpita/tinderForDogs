@@ -12,15 +12,18 @@ body{
 .container {
     max-width: 600px;
     margin: 0 auto;
+    color: #F8F8F8;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F6F7FB 100%);
+    border: 4px solid black;
 }
 img {
     width: 100%;
     object-fit: cover;
 }
 header ul,
-.popularity ul{
+.popularity{
     display: flex;
-
 }
 li{
     list-style: none;
@@ -29,14 +32,16 @@ header ul {
     justify-content: space-between;
     padding: 0 2rem;
 }
-.popularity ul{
+.popularity{
     justify-content: center;
     gap: 1rem;
+    padding: 0 18.5rem ;
 }
 
 .profile-img{
     height: 100%;
     border-radius: 15px;
+    animation: fadeVisibility 0.5s;
 }
 .eachDog {
     position: relative;
@@ -62,28 +67,48 @@ header ul {
     display: flex;
     justify-content: center;
 }
-.btn{
+/* .btn {
     border: none;
     border-radius: 50%;
-    height: 30px;
+    height: 3.5rem;
+    max-height: 5rem;
+    margin: 2rem;
+    max-width: 4rem;
+    padding: 4px;
+    Offset: 0px, 4px rgba(0, 0, 0, 0.25)
+} */
+
+.btn,
+.icon-img {
+    border: none;
     background: #fff;
-        margin: 2rem;
-        max-width: 4rem;
-    /* display: inline-flex;
-    align-items: center; */
+}
+
+
+.icon-img {
+    height: 30px;
 }
 
 .header-icon {
     margin: 1rem;
 }
 
-.cross:hover {
-    background: #FFE7EF;
-    box-shadow: 0px 10px 20px #EDD9DF;
+.btn {
+    padding: 2rem;
+    margin: 15px;
+    box-shadow: 0px 10px 20px #E9E9EA;
+    border-radius: 40px;
+
 }
-.heart:hover {
+
+.heart:hover,
+.heart:active {
     background: #DBFFF4;
-    box-shadow: 0px 10px 20px #CCF1E6;
+}
+
+.cross:hover,
+.cross:active {
+    background: #FFE7EF;
 }
 
 .badge {
@@ -106,3 +131,14 @@ header ul {
     text-align: center;
 }
 
+/* Animation */
+
+@keyframes fadeVisibility {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
