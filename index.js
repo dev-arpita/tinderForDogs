@@ -1,58 +1,63 @@
-
 import { dogs } from "./data.js";
-import {Dog} from "./charecter.js"
-console.log("dogs:", dogs)
-let currentDogIndex = 0
-let hasDog = false
+import {Dog} from "./Dog.js"
 
+let isWaiting = false
+let currentDog= getNewDog()
+
+/*Returns next dog*/
 function getNewDog() {
-    currentDogIndex+=1
-   currentDog = new Dog(dogs[currentDogIndex])
-   console.log("currentDog",currentDog)
-    render()
+     const nextDog= dogs.shift()
+    return nextDog ?  new Dog(nextDog) : false
 }
- function renderEndMessage() {
-    const endEmoji = "🐶"
-    const endMessage = `There are no more ${endEmoji} in your area`
-    document.body.innerHTML = `
-                <div class="end-game">
-                    <h3>${endMessage}</h3>
-                </div>
-                `
-    }
-   function like() {
-    if(!hasDog){
 
-        document.getElementById("like-badge").style.display = "inline"
-        document.getElementById("nope-badge").style.display = "none"
-         setTimeout(function(){
-
-        currentDog.setMatchStatus(true)
-        getNewDog()
-          render()
-         }, 1000)
+/* Render dog data */
+function render() {
+    if(currentDog) {
+    document.getElementById("main-content").innerHTML = currentDog.getDogsHtml()
     }
     else{
-    dogs.push(renderEndMessage())
+        document.body.innerHTML = renderEndMessage()
+    }
+}
+
+ function renderEndMessage() {
+    const endMessage = `
+                <div class="end-message">
+                    <p>There are no more 🐶 in your area right now! Come back later ❤️</p>
+                </div>
+            `
+    return endMessage
+}
+
+   function like() {
+        if(!isWaiting) {
+            document.getElementById("like-badge").style.display = "inline"
+            document.getElementById("nope-badge").style.display = "none"
+            currentDog.setMatchStatus(true)
+            currentDog = getNewDog()
+            isWaiting = true
+            setTimeout(()=> {
+                render()
+                isWaiting = false
+            }, 800)
+        }
     }
 
- }
    function dislike() {
+        if(!isWaiting) {
             document.getElementById("nope-badge").style.display = "inline"
             document.getElementById("like-badge").style.display = "none"
-             setTimeout(function(){
-                currentDog.setMatchStatus(true)
-                getNewDog()
-                   render()
-            }, 1000)
-
+            currentDog.setMatchStatus(false)
+            currentDog = getNewDog()
+            isWaiting = true
+            setTimeout(()=> {
+                render()
+                isWaiting = false
+            }, 800)
+        }
     }
+
 document.getElementById("like-btn").addEventListener('click', like)
 document.getElementById("dislike-btn").addEventListener('click', dislike)
-function render() {
-    document.getElementById("main-content").innerHTML = currentDog.getDogsHtml()
 
-}
-let currentDog = new Dog(dogs[currentDogIndex])
-console.log("dogsdata", currentDog)
 render()
