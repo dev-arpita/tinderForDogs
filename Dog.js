@@ -1,6 +1,4 @@
 // Create the Dog class here
-export {Dog}
-
 class Dog {
     constructor(data){
         Object.assign(this, data)
@@ -31,3 +29,5 @@ class Dog {
     }
 
 }
+
+export {Dog}
